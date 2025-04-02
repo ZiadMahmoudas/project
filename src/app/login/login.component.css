@@ -130,22 +130,6 @@ input:focus ~ label, input:valid ~ label, input:focus ~ i, input:valid ~ i {
   transition: 0.3s all ease-in-out;
 }
 
-.forget {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 22px;
-}
-
-.forget span {
-  display: flex;
-  gap: 5px;
-}
-
-.forget a {
-  color: #eee;
-  text-decoration: underline;
-}
-
 i {
   font-size: 19px;
   cursor: pointer;

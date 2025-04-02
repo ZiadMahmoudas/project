@@ -1,1 +1,54 @@
-<p>details works!</p>
+<section class="sec pb-4">
+  <div class=" px-0 rounded-5">
+      <div class="bg-dark ">
+<div class="notation text-white container  pt-3 ">
+  <h4>All Notes</h4>
+  <div class="d-flex gap-2">
+  <button id="clear" class="d-flex  align-items-center   btn btn-success text-white" type="button" (click)="openPopup()">
+    Create Notes
+  </button>
+  <button id="clear" class="d-flex  align-items-center gap-2  btn btn-info text-white" type="button" (click)="FetchNotes()">
+    appear Notes
+  </button>
+
+</div>
+</div>
+
+<div class="row mx-0">
+  <div class="col-12 col-sm-6 col-lg-4 mb-3">
+<div *ngIf="allNotes.length <1 ">
+  <h2 class="text-white">No Notes Created</h2>
+</div>
+    <div class="card text-bg-secondary mb-3" style="max-width: 18rem;" *ngFor="let task of allNotes">
+      <div class="card-header text-center">{{task.category}}</div>
+  <div class="card-body">
+    <h5 class="card-title text-center">{{task.title}}</h5>
+    <hr>
+    <p class="card-text">{{task.content}}</p>
+    <p class="card-text">{{task.priority}}</p>
+    <p class="card-text">{{task.tags}}</p>
+    <div class="d-flex gap-2">
+    <a [routerLink]="'view'" class="btn btn-primary">view</a>
+    <button type="button"  class="btn btn-outline-success">update</button>
+    <button type="button" class="btn btn-danger" (click)="onDelete(task.id)">Delete</button>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<app-create-node
+[isPopupOpen]="isPopupOpenCreate"
+(closePopup)="closePopup()"
+*ngIf="isPopupOpenCreate"
+(EmitNote)="createNotes()"
+></app-create-node>
+
+<app-delete
+[isPopupOpen1]="isPopupOpenDelete"
+(BTNDelted)="closepopup1()"
+[noteId]="noteToDeleteId"
+(EmitNote)="onConfirmDelete()"
+*ngIf="isPopupOpenDelete"></app-delete>

@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   standalone:true,
@@ -11,10 +13,16 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-constructor(private fb:FormBuilder,private render: Renderer2){}
+constructor(
+  private fb:FormBuilder,
+  private render: Renderer2,
+  private toastr:ToastrService,
+  private auth:AuthService,
+  private route:Router
+){}
 loginForm = this.fb.group({
   email:['',[Validators.required,Validators.pattern(/\w+@(gmail|mail|outlook).(com|net|org)$/i)]],
-  password:['',[Validators.required,Validators.pattern(/^\w{4,15}$/i)]]
+  password:['',[Validators.required,Validators.pattern(/^\w{4,}$/i)]]
 })
 get email(){
   return this.loginForm.controls.email
@@ -23,14 +31,26 @@ get password(){
 
   return this.loginForm.controls.password
 }
-ngOnInit(): void {
-  // this.password.valueChanges.subscribe(_ => {
-  //   console.log("invalid?", this.password?.invalid);
-  //   console.log("touched?", this.password?.touched);
-  //   console.log("Errors:", this.password?.errors);
-  // });
-}
 
+sumbit(){
+  if (this.loginForm.invalid) {
+    this.toastr.warning("Enter Your Correct Data please Dont play For Disabled Input");
+    return;
+  }
+  this.auth.postLog(this.loginForm.value).subscribe({
+    next:(res:any)=>{
+      this.auth.enterForHome()
+      this.auth.storeToken(res.token)
+      this.toastr.success("correct Data , Enter your page");
+      this.route.navigate(['/Home']);
+    },
+    error:(err:any)=>{
+      if (err.status === 401 ) {
+        this.toastr.error("This Email is Unauthorized");
+      }
+    }
+  })
+}
 @ViewChild("btneye1") btn: ElementRef
 @ViewChild('passwordInput') passwordInput: ElementRef;
 appear(){
@@ -46,8 +66,13 @@ appear(){
     this.render.removeClass(eyeIcon, 'bi-eye-slash-fill');
   }
 }
-sumbit(){
-
+ngOnInit(): void {
+  // this.password.valueChanges.subscribe(_ => {
+  //   console.log("invalid?", this.password?.invalid);
+  //   console.log("touched?", this.password?.touched);
+  //   console.log("Errors:", this.password?.errors);
+  // });
 }
+
 }
 

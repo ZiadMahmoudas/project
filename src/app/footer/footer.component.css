@@ -129,6 +129,11 @@ footer .sec1 .social p {
   font-family: Medium;
 }
 
+img {
+  background: #bb5d5d;
+  box-shadow: 4px 4px 3px #F1EB6C;
+}
+
 @media (min-width: 576px) {
   html {
     font-size: 16px;

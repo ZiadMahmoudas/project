@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoaderService } from './core/services/loader.service';
 
 
 @Component({
@@ -8,6 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pro';
+  constructor(public loadingService:LoaderService){}
   // obj={
   //   name:"omar",
   //   age:26

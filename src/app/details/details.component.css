@@ -1,1 +1,11 @@
-/*# sourceMappingURL=details.component.css.map */
+.sec {
+  margin-top: 50px;
+}
+.sec .notation {
+  display: flex;
+  justify-content: space-between;
+}
+
+p {
+  margin-bottom: 1rem;
+}/*# sourceMappingURL=details.component.css.map */

@@ -16,6 +16,9 @@ import { AboutComponent } from './about/about.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
+import { CreateNodeComponent } from './details/create-node/create-node.component';
+import { ViewNotesComponent } from './details/view-notes/view-notes.component';
+import { DeleteComponent } from './details/delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { CoreModule } from './core/core.module';
     NavBarComponent,
     NotFoundComponent,
     AboutComponent,
+    CreateNodeComponent,
+    ViewNotesComponent,
+    DeleteComponent,
   ],
   imports: [
     BrowserModule,

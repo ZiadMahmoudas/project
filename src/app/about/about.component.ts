@@ -6,10 +6,7 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent {
-  private escListener:()=>void
   constructor(private render:Renderer2){}
-  @ViewChild("open")btnopen:ElementRef
-  @ViewChild("open")btnclose:ElementRef
   @ViewChild("popupItem")popupItem:ElementRef
 
   openPopup() {

@@ -1,6 +1,9 @@
 <app-nav-bar></app-nav-bar>
+<app-loader *ngIf="loadingService.isloading | async"></app-loader>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
+
+
  <!-- <div class="container pt-3">
  <p >myname:{{"ziad"| uppercase}}</p>
  <p >myname:{{"ZIAD"| lowercase}}</p>

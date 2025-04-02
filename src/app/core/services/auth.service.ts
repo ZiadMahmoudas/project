@@ -10,7 +10,15 @@ export class AuthService {
 
   constructor(private http:HttpClient) { }
 
-/*  Register */
+
+isAuthenticated = false;
+isAuthorized(): boolean {
+  return this.isAuthenticated;
+}
+enterForHome() {
+  this.isAuthenticated = true;
+}
+/* Save For Notes */
   storeToken(token: string) {
     localStorage.setItem("User_Token", token);
   }
@@ -18,15 +26,21 @@ export class AuthService {
   getToken(): string  {
     return localStorage.getItem("User_Token");
   }
+/* unSubscribe For Note  */
   removeToken(){
     localStorage.removeItem("User_Token");
   }
-
+/*  Register */
+    url1 = "http://localhost:8000/register";
   postReg(data: User) {
-    let url = "http://localhost:8000/register";
-    return this.http.post(url, data);
+    return this.http.post(this.url1, data);
   }
-
 /*  Register End*/
 
+/* Login */
+urlLog = "http://localhost:8000/login"
+ postLog(data:User){
+  return this.http.post(this.urlLog,data);
+ }
+ /* Login End */
 }

@@ -49,7 +49,6 @@ export class RegisterComponent {
   get address(){
    return this.Register.controls['address']
   }
-  isLoading:boolean = false;
   onSumbit() {
     if (this.Register.invalid) {
       this.toastr.warning("Enter Your Correct Data please Dont play For Disabled Input");
@@ -59,16 +58,13 @@ export class RegisterComponent {
     this.auth.postReg(
       this.Register.value
    ).subscribe({
-      next: (response:any) => {
-        this.auth.storeToken(response.token);
+      next: () => {
+        this.auth.enterForHome();
         this.toastr.success("correct Data , Enter your page");
-        this.isLoading = true
         this.route.navigate(['/Home']);
-
       },
       error: (err) => {
         if (err.status === 400 ) {
-          this.isLoading = false
           this.toastr.error("This Email is Already Exist");
         }
       }
