@@ -1,31 +1,5 @@
-<app-nav-bar></app-nav-bar>
+<app-nav-bar *ngIf="auth.getToken()"></app-nav-bar>
 <app-loader *ngIf="loadingService.isloading | async"></app-loader>
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+<app-footer *ngIf="auth.getToken()"></app-footer>
 
-
- <!-- <div class="container pt-3">
- <p >myname:{{"ziad"| uppercase}}</p>
- <p >myname:{{"ZIAD"| lowercase}}</p>
- <p >myname:{{"ziad mahmoud"| titlecase}}</p>
- <p>Data:{{obj|json}}</p>
- <ul>
-  <li *ngFor="let user of arr; let i = index">
-    {{ i + 1 }} - {{ user }}
-  </li>
-</ul>
- <p *ngFor="let user of arr">ARRAY:{{user.slice(0,5)}}</p>
- <hr>
- <p>Default Date:{{currentDate|date}}</p>
- <p>short:{{currentDate|date:"short"}}</p>
- <p>medium{{currentDate|date:"medium"}}</p>
- <p>long:{{currentDate|date:"long"}}</p>
- <p>full:{{currentDate|date:'full'}}</p>
- <hr>
- <p>short:{{currentDate|date:"shortDate"}}</p>
- <p>medium:{{currentDate|date:"mediumDate"}}</p>
- <p>longDate:{{currentDate|date:"longDate"}}</p>
- <p>fullDate:{{currentDate|date:'fullDate'}}</p>
- <hr>
- <p>formate:{{currentDate|date:"dd/MM/YYYY"}}</p>
-</div> -->

@@ -1,3 +1,4 @@
 export const environment = {
-     postManAPIKEY:""
+      prodction:false, /* local on server  */
+      baseurl:"http://localhost:8000/"
 };

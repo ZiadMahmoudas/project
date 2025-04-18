@@ -1,46 +1,43 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { User } from 'src/app/models/users';
+import { User } from 'src/app/core/models/users';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  url: string;
+  constructor(private http:HttpClient) {
+    this.url = environment.baseurl;
+   }
 
-  constructor(private http:HttpClient) { }
+  token:string = "User_Token" /* Key For Token */
 
-
-isAuthenticated = false;
-isAuthorized(): boolean {
-  return this.isAuthenticated;
-}
-enterForHome() {
-  this.isAuthenticated = true;
-}
-/* Save For Notes */
-  storeToken(token: string) {
-    localStorage.setItem("User_Token", token);
+/* Save For Token */
+  storeToken(Token: string) {
+    localStorage.setItem(this.token, Token);
   }
 
   getToken(): string  {
-    return localStorage.getItem("User_Token");
+    return localStorage.getItem(this.token);
   }
-/* unSubscribe For Note  */
+/* unSubscribe For Token  */
   removeToken(){
-    localStorage.removeItem("User_Token");
+    localStorage.removeItem(this.token);
   }
 /*  Register */
-    url1 = "http://localhost:8000/register";
-  postReg(data: User) {
-    return this.http.post(this.url1, data);
+postReg(data: User) {
+   const url1 = `${this.url}register`;
+    return this.http.post(url1, data);
   }
 /*  Register End*/
 
 /* Login */
-urlLog = "http://localhost:8000/login"
- postLog(data:User){
-  return this.http.post(this.urlLog,data);
+postLog(data:User){
+  const urlLog = `${this.url}login`;
+  return this.http.post(urlLog,data);
  }
  /* Login End */
 }

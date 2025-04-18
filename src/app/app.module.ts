@@ -2,36 +2,37 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { DetailsComponent } from './details/details.component';
-import { FooterComponent } from './footer/footer.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { FooterComponent } from './shared/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { LoaderComponent } from './loader/loader.component';
+import { LoaderComponent } from './shared/loader/loader.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
-import { CreateNodeComponent } from './details/create-node/create-node.component';
-import { ViewNotesComponent } from './details/view-notes/view-notes.component';
-import { DeleteComponent } from './details/delete/delete.component';
+import { HttpInterceptorProviders } from './core/interceptors';
+import { SharedModule } from './shared/shared.module';
+import { NavBarComponent } from "./shared/nav-bar/nav-bar.component";
+import { NotFoundComponent } from './feature/not-found/not-found.component';
+import { AuthModule } from './feature/auth/auth.module';
+import { DeletedComponent } from './feature/details/view-notes/deleted/deleted.component';
+import { UpdateViewComponent } from './feature/details/view-notes/update-view/update-view.component';
+import { ViewNotesComponent } from './feature/details/view-notes/view-notes.component';
+import { DeleteComponent } from './feature/details/delete/delete.component';
+import { CreateNodeComponent } from './feature/details/create-node/create-node.component';
+import { DetailsComponent } from './feature/details/details.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     DetailsComponent,
-    FooterComponent,
-    NavBarComponent,
-    NotFoundComponent,
     AboutComponent,
     CreateNodeComponent,
-    ViewNotesComponent,
     DeleteComponent,
+    ViewNotesComponent,
+    UpdateViewComponent,
+    DeletedComponent
   ],
   imports: [
     BrowserModule,
@@ -39,14 +40,17 @@ import { DeleteComponent } from './details/delete/delete.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     FormsModule,
-    RegisterComponent,
     ReactiveFormsModule,
-    LoaderComponent,
+   AuthModule,
     HttpClientModule,
-    LoginComponent,
-    CoreModule
-  ],
-  providers: [],
+    SharedModule,
+    LoaderComponent,
+    NavBarComponent,
+    FooterComponent,
+    NotFoundComponent,
+    HomeComponent,
+],
+  providers: [HttpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

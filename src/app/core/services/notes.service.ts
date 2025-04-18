@@ -1,28 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Notes } from 'src/app/models/notes';
+import { ToastrService } from 'ngx-toastr';
+import { Notes } from 'src/app/core/models/notes';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
-
-  constructor(private http:HttpClient) { }
-
-  CreateNotes(data:Notes){
-    const url = "http://localhost:8000/notes"
+  url: string;
+  constructor(private http:HttpClient,private tostar:ToastrService) {
+    this.url = environment.baseurl;
+   }
+  CreateNewNotes(data:Notes){
+    const url = `${this.url}notes`
    return this.http.post(url,data)
   }
   getNotes(){
-    const url = "http://localhost:8000/notes"
+    const url = `${this.url}notes`
     return this.http.get(url)
   }
   DeleteNotes(id:number | undefined){
-    const url = `http://localhost:8000/notes/:${id}`
+    const url = `${this.url}notes/${id}`
     return this.http.delete(url)
   }
   updateNotes(id:number | undefined,data:Notes){
-    const url = `http://localhost:8000/notes/:${id}`
+    const url = `${this.url}notes/${id}`
+
     return this.http.put(url,data)
   }
 }
