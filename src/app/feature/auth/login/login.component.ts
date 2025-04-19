@@ -29,7 +29,6 @@ get email(){
   return this.loginForm.controls['email']
 }
 get password(){
-
   return this.loginForm.controls['password']
 }
 
